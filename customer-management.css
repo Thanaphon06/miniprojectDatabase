@@ -1,0 +1,189 @@
+/* รีเซ็ตค่าเบื้องต้น */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Prompt', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+}
+
+/* เมนูด้านซ้าย (Sidebar) */
+.sidebar {
+    width: 220px;
+    background-color: #00796b;
+    min-height: 100vh;
+    padding: 30px 5px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar h2 {
+    color: #fff;
+    margin-right: 50px;
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
+.sidebar ul {
+    list-style: none;
+    width: 100%;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #004d40;
+}
+
+.logout {
+    margin-top: auto;
+    width: 100%;
+    text-align: center;
+}
+
+.logout a {
+    color: #fff;
+    background-color: #e74c3c;
+    padding: 12px 20px;
+    border-radius: 30px;
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 80%;
+}
+
+.logout a:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+.logout a:active {
+    background-color: #a93226;
+    transform: translateY(0);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+    margin-left: 250px; /* เว้นที่สำหรับ sidebar */
+    padding: 20px;
+    width: calc(100% - 250px); /* ปรับความกว้างให้เหมาะสม */
+}
+
+h1 {
+    font-size: 32px;
+    color: #00796b;
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.add-customer-section {
+    margin-bottom: 40px;
+}
+
+.add-customer-section form {
+    display: flex;
+    gap: 10px;
+}
+
+.add-customer-section input {
+    padding: 10px;
+    font-size: 16px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.add-customer-section button {
+    padding: 10px 20px;
+    background-color: #00796b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-customer-section button:hover {
+    background-color: #004d40;
+}
+
+.customer-list table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.customer-list th, .customer-list td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.customer-list th {
+    background-color: #00796b;
+    color: #fff;
+}
+
+.customer-list td:last-child {
+    text-align: center;
+}
+
+.customer-list td button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.customer-list td .edit-btn {
+    background-color: #f39c12;
+    color: #fff;
+}
+
+.customer-list td .edit-btn:hover {
+    background-color: #e67e22;
+}
+
+.customer-list td .delete-btn {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.customer-list td .delete-btn:hover {
+    background-color: #c0392b;
+}

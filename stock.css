@@ -1,0 +1,167 @@
+/* รีเซ็ตค่าเบื้องต้น */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Prompt', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+}
+
+/* เมนูด้านซ้าย (Sidebar) */
+.sidebar {
+    width: 220px;
+    background-color: #00796b;
+    min-height: 100vh;
+    padding: 30px 5px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar h2 {
+    color: #fff;
+    margin-right: 50px;
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
+.sidebar ul {
+    list-style: none;
+    width: 100%;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #004d40;
+}
+
+/* เนื้อหาหลัก (Content) */
+.content {
+    margin-left: 240px;
+    padding: 40px;
+    flex-grow: 1;
+    background-color: #f9f9f9;
+}
+
+/* หัวข้อใหญ่ */
+.content h1 {
+    font-size: 32px;
+    color: #00796b;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* ตารางสินค้า */
+.table-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container table th, 
+.table-container table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-container table th {
+    background-color: #00796b;
+    color: white;
+    text-transform: uppercase;
+}
+
+.table-container table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-container table tbody tr:hover {
+    background-color: #e0f2f1;
+}
+
+.table-container table td {
+    color: #333;
+}
+
+/* ปุ่ม Logout */
+/* ปุ่ม Logout */
+.logout {
+    margin-top: auto;
+    width: 100%;
+    text-align: center;
+}
+
+.logout a {
+    color: #fff;
+    background-color: #e74c3c;
+    padding: 12px 20px;
+    border-radius: 30px;
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 80%;
+}
+
+.logout a:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logout a:active {
+    background-color: #a93226;
+    transform: translateY(0);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: relative;
+        min-height: auto;
+    }
+
+    .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+}

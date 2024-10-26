@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <h2><i class="fas fa-store"></i> Admin <dir>Enterprise</dir></h2>
+        </div>
+        <ul class="menu">
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="product-management.html"><i class="fas fa-box"></i> การจัดการสินค้า</a></li>
+            <li><a href="stocks.php"><i class="fas fa-warehouse"></i> สต๊อก</a></li>
+            <li><a href="sales-management.html"><i class="fas fa-shopping-cart"></i> การจัดการการขาย</a></li>
+            <li><a href="sales-history.html"><i class="fas fa-history"></i> ประวัติการขาย</a></li>
+            <li><a href="employee-management.html"><i class="fas fa-users"></i> การจัดการพนักงาน</a></li>
+            <li><a href="customer-management.html"><i class="fas fa-chart-bar"></i> จัดการสมาชิกลูกค้า</a></li>
+            <li><a href="customer.php"><i class="fas fa-chart-bar"></i> รายชื่อลูกค้า</a></li>
+            <li><a href="employee.php"><i class="fas fa-chart-bar"></i> รายชื่อพนักงาน</a></li>
+            <li><a href="type_item.php"><i class="fas fa-chart-bar"></i> รายละเอียดสินค้า</a></li>
+            <li><a href="item.php"><i class="fas fa-chart-bar"></i> สินค้า</a></li>
+            <li><a href="member.php"><i class="fas fa-chart-bar"></i> สมาชิก</a></li>
+        </ul>
+        <div class="logout">
+            <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Dashboard</h1>
+        <div class="cards">
+            <div class="card">
+                <h3>ยอดขายวันนี้</h3>
+                <p>฿15,000</p>
+            </div>
+            <div class="card">
+                <h3>จำนวนสินค้าคงคลัง</h3>
+                <p>1,200 ชิ้น</p>
+            </div>
+            <div class="card">
+                <h3>คำสั่งซื้อใหม่</h3>
+                <p>50 รายการ</p>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="salesChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // สร้างกราฟแสดงยอดขาย
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['จันทร์', 'อังคาร', 'พุธ', 'พฤหัส', 'ศุกร์', 'เสาร์', 'อาทิตย์'],
+                datasets: [{
+                    label: 'ยอดขาย (บาท)',
+                    data: [12000, 15000, 13000, 10000, 18000, 20000, 15000],
+                    borderColor: 'rgba(0, 169, 157, 1)',
+                    backgroundColor: 'rgba(0, 169, 157, 0.2)',
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'วันในสัปดาห์'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'ยอดขาย (บาท)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

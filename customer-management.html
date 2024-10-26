@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จัดการสมาชิกลูกค้า</title>
+    <link rel="stylesheet" href="customer-management.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <h2><i class="fas fa-store"></i> Admin <dir>Enterprise</dir></h2>
+        </div>
+        <ul class="menu">
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="product-management.html"><i class="fas fa-box"></i> การจัดการสินค้า</a></li>
+            <li><a href="stock.html"><i class="fas fa-warehouse"></i> สต๊อก</a></li>
+            <li><a href="sales-management.html"><i class="fas fa-shopping-cart"></i> การจัดการการขาย</a></li>
+            <li><a href="sales-history.html"><i class="fas fa-history"></i> ประวัติการขาย</a></li>
+            <li><a href="employee-management.html"><i class="fas fa-users"></i> การจัดการพนักงาน</a></li>
+            <li><a href="customer-management.html"><i class="fas fa-chart-bar"></i> จัดการสมาชิกลูกค้า</a></li>
+        </ul>
+        <div class="logout">
+            <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>จัดการสมาชิกลูกค้า</h1>
+
+        <!-- ฟอร์มเพิ่มลูกค้าใหม่ -->
+        <div class="add-customer-section">
+            <h2>เพิ่มลูกค้าใหม่</h2>
+            <form id="addCustomerForm">
+                <input type="text" id="customerName" placeholder="ชื่อลูกค้า" required>
+                <input type="number" id="customerPoints" placeholder="แต้มสะสมเริ่มต้น" required>
+                <button type="submit">เพิ่มลูกค้า</button>
+            </form>
+        </div>
+
+        <!-- ตารางข้อมูลลูกค้า -->
+        <div class="customer-list">
+            <h2>รายชื่อลูกค้า</h2>
+            <table id="customerTable">
+                <thead>
+                    <tr>
+                        <th>ลำดับ</th>
+                        <th>ชื่อ</th>
+                        <th>แต้มสะสม</th>
+                        <th>การจัดการ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ข้อมูลลูกค้าจะถูกแสดงที่นี่ -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="customer-management.js"></script>
+</body>
+</html>

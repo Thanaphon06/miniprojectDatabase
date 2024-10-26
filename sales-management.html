@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จัดการการขาย</title>
+    <link rel="stylesheet" href="sales-management.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <h2><i class="fas fa-store"></i> Admin <dir>Enterprise</dir></h2>
+        </div>
+        <ul class="menu">
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="product-management.html"><i class="fas fa-box"></i> การจัดการสินค้า</a></li>
+            <li><a href="stock.html"><i class="fas fa-warehouse"></i> สต๊อก</a></li>
+            <li><a href="sales-management.html"><i class="fas fa-shopping-cart"></i> การจัดการการขาย</a></li>
+            <li><a href="sales-history.html"><i class="fas fa-history"></i> ประวัติการขาย</a></li>
+            <li><a href="employee-management.html"><i class="fas fa-users"></i> การจัดการพนักงาน</a></li>
+            <li><a href="customer-management.html"><i class="fas fa-chart-bar"></i> จัดการสมาชิกลูกค้า</a></li>
+        </ul>
+        <div class="logout">
+            <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+    <div class="content">
+        <h1>จัดการการขาย</h1>
+
+        <div class="sales-container">
+            <!-- ฟอร์มการเพิ่มรายการขาย -->
+            <div class="sale-form">
+                <h2>เพิ่มรายการขาย</h2>
+                <form id="saleForm">
+                    <label for="saleDate">วันที่ขาย</label>
+                    <input type="date" id="saleDate" name="saleDate" required>
+                    
+                    <label for="productCode">รหัสสินค้า</label>
+                    <input type="text" id="productCode" name="productCode" required>
+                    
+                    <label for="productName">ชื่อสินค้า</label>
+                    <input type="text" id="productName" name="productName" required>
+                    
+                    <label for="productPrice">ราคาสินค้าต่อหน่วย</label>
+                    <input type="number" id="productPrice" name="productPrice" required>
+                    
+                    <label for="quantity">จำนวน</label>
+                    <input type="number" id="quantity" name="quantity" required>
+                    
+                    <label for="discount">ส่วนลด</label>
+                    <input type="number" id="discount" name="discount">
+                    <h3>ยอดรวมทั้งหมด: <span id="grandTotal">0.00</span> บาท</h3>
+
+                    <button type="button" onclick="addProduct()">เพิ่มสินค้า</button>
+                </form>
+
+                <!-- ส่วนข้อมูลสมาชิก -->
+                <h2>ข้อมูลสมาชิก</h2>
+                <label for="isMember">สมาชิก</label>
+                <select id="isMember" name="isMember" onchange="toggleMemberInfo()">
+                    <option value="ทั่วไป">ทั่วไป</option>
+                    <option value="สมาชิก">เป็นสมาชิก</option>
+                </select>
+
+                <!-- ข้อมูลสมาชิก -->
+                <div id="memberInfo" style="display: none;">
+                    <label for="memberCode">รหัสสมาชิก</label>
+                    <input type="text" id="memberCode" name="memberCode">
+
+                    <label for="customerName">ชื่อลูกค้า</label>
+                    <input type="text" id="customerName" name="customerName">
+
+                    <label for="pointsAdded">แต้มที่เพิ่ม</label>
+                    <input type="number" id="pointsAdded" name="pointsAdded">
+
+                    <label for="totalPoints">แต้มทั้งหมด</label>
+                    <input type="number" id="totalPoints" name="totalPoints" readonly>
+                </div>
+
+                
+                <button type="button" onclick="submitSale()">บันทึกการขายทั้งหมด</button>
+            </div>
+
+            <!-- รูปภาพสินค้า -->
+            <div class="product-image">
+                <!-- <h2>รูปสินค้า</h2>
+                <img src="product-placeholder.png" alt="Product Image"> -->
+
+                <!-- ตารางแสดงสินค้าที่เพิ่ม -->
+                <div class="sales-history">
+                    <h2>รายการสินค้าที่เพิ่ม</h2>
+                    <table id="salesTable">
+                        <thead>
+                            <tr>
+                                <th>รหัสสินค้า</th>
+                                <th>ชื่อสินค้า</th>
+                                <th>ราคา</th>
+                                <th>จำนวน</th>
+                                <th>ส่วนลด</th>
+                                <th>รวม</th>
+                                <th>ลบ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- รายการสินค้าจะแสดงที่นี่ -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let products = [];
+        let grandTotal = 0;
+
+        function toggleMemberInfo() {
+            const isMember = document.getElementById('isMember').value;
+            const memberInfo = document.getElementById('memberInfo');
+            if (isMember === 'สมาชิก') {
+                memberInfo.style.display = 'block';
+            } else {
+                memberInfo.style.display = 'none';
+            }
+        }
+
+        function addProduct() {
+            const productCode = document.getElementById('productCode').value;
+            const productName = document.getElementById('productName').value;
+            const productPrice = parseFloat(document.getElementById('productPrice').value);
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const discount = parseFloat(document.getElementById('discount').value || 0);
+
+            const total = (productPrice * quantity) - discount;
+
+            const product = {
+                productCode,
+                productName,
+                productPrice,
+                quantity,
+                discount,
+                total
+            };
+
+            products.push(product);
+            grandTotal += total;
+            updateSalesTable();
+            updateGrandTotal();
+        }
+
+        function updateSalesTable() {
+            const salesTableBody = document.getElementById('salesTable').getElementsByTagName('tbody')[0];
+            salesTableBody.innerHTML = '';
+
+            products.forEach((product, index) => {
+                const row = salesTableBody.insertRow();
+
+                row.insertCell(0).textContent = product.productCode;
+                row.insertCell(1).textContent = product.productName;
+                row.insertCell(2).textContent = product.productPrice.toFixed(2);
+                row.insertCell(3).textContent = product.quantity;
+                row.insertCell(4).textContent = product.discount.toFixed(2);
+                row.insertCell(5).textContent = product.total.toFixed(2);
+
+                const deleteCell = row.insertCell(6);
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'ลบ';
+                deleteButton.onclick = () => deleteProduct(index);
+                deleteCell.appendChild(deleteButton);
+            });
+        }
+
+        function deleteProduct(index) {
+            grandTotal -= products[index].total;
+            products.splice(index, 1);
+            updateSalesTable();
+            updateGrandTotal();
+        }
+
+        function updateGrandTotal() {
+            document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
+        }
+
+        function submitSale() {
+            const saleDate = document.getElementById('saleDate').value;
+            const isMember = document.getElementById('isMember').value;
+            const memberCode = document.getElementById('memberCode').value || null;
+            const customerName = document.getElementById('customerName').value || null;
+
+            // สร้างข้อมูลการขาย
+            const saleData = {
+                saleDate,
+                isMember,
+                memberCode,
+                customerName,
+                products,
+                grandTotal
+            };
+
+            console.log('ข้อมูลการขายที่บันทึก:', saleData);
+            alert('บันทึกการขายเรียบร้อย ยอดรวม: ' + grandTotal.toFixed(2) + ' บาท');
+            // ล้างข้อมูลหลังบันทึกการขาย
+            products = [];
+            grandTotal = 0;
+            updateSalesTable();
+            updateGrandTotal();
+            document.getElementById('saleForm').reset();
+        }
+    </script>
+</body>
+</html>
